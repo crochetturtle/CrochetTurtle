@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Crochet Turtle – Turning Yarn into Magic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Pacifico&display=swap" rel="stylesheet"/>
+<style>
+/* ─── CSS Variables ─────────────────────────────── */
+:root{
+  --green:    #2daa79;
+  --dark:     #357f4c;
+  --black:    #000000;
+  --deepest:  #011f05;
+  --forest:   #01330a;
+  --white:    #ffffff;
+  --cream:    #f8f5f0;
+  --soft:     #eef7f2;
+  --radius:   16px;
+  --shadow:   0 4px 24px rgba(1,31,5,.10);
+  --shadow-lg:0 8px 40px rgba(1,31,5,.16);
+  --font-main:'Montserrat', 'Poppins', sans-serif;
+  --transition:.28s cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-main);
+  background:var(--cream);
+  color:var(--deepest);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{text-decoration:none;color:inherit}
+
+/* ─── Header ────────────────────────────────────── */
+header{
+  background:var(--white);
+  box-shadow:0 2px 16px rgba(1,31,5,.08);
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+.header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.logo-img{
+  width:56px;height:56px;border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 2px 10px rgba(45,170,121,.25);
+  flex-shrink:0;
+}
+.brand-text{line-height:1}
+.brand-crochet{
+  font-family:'Pacifico', cursive;
+  font-size:clamp(1.3rem,4vw,1.8rem);
+  letter-spacing:1px;
+  display:block;
+}
+.brand-crochet .o-letter{color:#357f4c}
+.brand-crochet .rest{color:var(--black)}
+.brand-turtle{
+  font-family:'Comfortaa', cursive;
+  font-size:clamp(.6rem,2vw,.82rem);
+  font-weight:700;
+  letter-spacing:4px;
+  color:var(--black);
+  display:block;
+  margin-top:3px;
+}
+.tagline{
+  font-family:'Poppins', sans-serif;
+  font-size:.68rem;
+  color:#888;
+  font-style:italic;
+  font-weight:300;
+  display:none;
+  margin-top:2px;
+}
+@media(min-width:480px){.tagline{display:block}}
+
+.cart-btn-header{
+  background:var(--soft);
+  border:2px solid var(--green);
+  color:var(--forest);
+  font-weight:600;
+  font-size:.82rem;
+  padding:8px 16px;
+  border-radius:50px;
+  display:flex;align-items:center;gap:6px;
+  transition:var(--transition);
+  white-space:nowrap;
+}
+.cart-btn-header:hover{background:var(--green);color:var(--white)}
+.cart-count-badge{
+  background:var(--green);
+  color:var(--white);
+  border-radius:50%;
+  width:20px;height:20px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;
+  transition:var(--transition);
+}
+.cart-btn-header:hover .cart-count-badge{background:var(--white);color:var(--green)}
+
+/* ─── Hero ──────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#011f05 0%,#01330a 40%,#357f4c 80%,#2daa79 100%);
+  padding:52px 20px 44px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero h2{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(1.5rem,5vw,2.8rem);
+  font-weight:600;
+  color:var(--white);
+  letter-spacing:-.5px;
+  position:relative;
+}
+.hero h2 em{color:#2daa79;font-style:normal}
+.hero p{
+  margin-top:10px;
+  font-size:clamp(.85rem,2.5vw,1.05rem);
+  color:rgba(255,255,255,.75);
+  font-family:'Poppins',sans-serif;
+  font-weight:300;
+  font-style:italic;
+  position:relative;
+}
+.hero-pills{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-top:22px;position:relative;
+}
+.hero-pill{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  color:var(--white);
+  padding:6px 16px;border-radius:50px;
+  font-size:.78rem;font-weight:500;
+  backdrop-filter:blur(4px);
+}
+
+/* ─── Filters ───────────────────────────────────── */
+.filters-section{
+  background:var(--white);
+  border-bottom:1px solid #e8f0eb;
+  padding:14px 20px;
+  position:sticky;
+  top:77px;z-index:150;
+}
+.filters-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.filter-label{
+  font-size:.72rem;font-weight:700;
+  color:#999;text-transform:uppercase;letter-spacing:1px;
+}
+.filter-btn{
+  padding:7px 18px;border-radius:50px;font-size:.82rem;font-weight:600;
+  border:2px solid #dce8e0;
+  color:#666;background:var(--white);
+  transition:var(--transition);
+  white-space:nowrap;
+}
+.filter-btn:hover{border-color:var(--green);color:var(--green)}
+.filter-btn.active{background:var(--green);border-color:var(--green);color:var(--white)}
+
+/* ─── Products Section ──────────────────────────── */
+.products-section{
+  max-width:1200px;margin:0 auto;
+  padding:32px 16px 120px;
+}
+.section-title{
+  font-size:clamp(.95rem,3vw,1.2rem);
+  font-weight:700;color:var(--forest);
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title::after{
+  content:'';flex:1;height:2px;
+  background:linear-gradient(90deg,var(--soft),transparent);
+  border-radius:2px;
+}
+
+/* Grid */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+@media(max-width:480px){
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+
+/* Card */
+.product-card{
+  background:var(--white);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:var(--transition);
+  display:flex;flex-direction:column;
+  position:relative;
+}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+
+.card-cat-badge{
+  position:absolute;top:10px;left:10px;z-index:5;
+  background:rgba(1,31,5,.72);
+  color:var(--white);
+  font-size:.6rem;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:50px;
+  backdrop-filter:blur(4px);
+}
+
+/* Image Carousel */
+.img-carousel{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:#f0ede8;
+}
+.img-carousel-track{
+  display:flex;height:100%;
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
+}
+.img-carousel-track img{
+  min-width:100%;height:100%;object-fit:cover;flex-shrink:0;
+}
+.carousel-prev,.carousel-next{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.85);
+  border-radius:50%;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--forest);
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  z-index:5;opacity:0;transition:opacity .2s;
+  backdrop-filter:blur(2px);
+  line-height:1;
+}
+.img-carousel:hover .carousel-prev,.img-carousel:hover .carousel-next{opacity:1}
+.carousel-prev{left:8px}
+.carousel-next{right:8px}
+.carousel-dots{
+  position:absolute;bottom:7px;left:0;right:0;
+  display:flex;justify-content:center;gap:4px;
+}
+.carousel-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.5);
+  transition:background .2s,transform .2s;
+}
+.carousel-dot.active{background:var(--white);transform:scale(1.25)}
+
+/* Card Body */
+.card-body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
+.card-name{font-size:.88rem;font-weight:700;color:var(--deepest);line-height:1.3;margin-bottom:4px}
+@media(max-width:480px){.card-name{font-size:.8rem}}
+.card-desc{font-size:.73rem;color:#888;font-family:'Poppins',sans-serif;font-weight:300;margin-bottom:10px;flex:1;line-height:1.5}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}
+.card-price{font-size:1rem;font-weight:800;color:var(--dark)}
+@media(max-width:480px){.card-price{font-size:.9rem}}
+.add-cart-btn{
+  background:var(--green);color:var(--white);
+  padding:8px 14px;border-radius:50px;
+  font-size:.78rem;font-weight:700;letter-spacing:.3px;
+  transition:var(--transition);flex-shrink:0;
+}
+.add-cart-btn:hover{background:var(--dark);transform:scale(1.04)}
+.add-cart-btn.added{background:var(--forest)}
+@media(max-width:480px){.add-cart-btn{padding:7px 11px;font-size:.72rem}}
+
+/* ─── Floating Buttons ───────────────────────────── */
+.float-wrap{
+  position:fixed;bottom:24px;right:20px;
+  display:flex;flex-direction:column;align-items:flex-end;
+  gap:12px;z-index:300;
+}
+.float-cart{
+  background:var(--forest);color:var(--white);
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(1,31,5,.35);
+  font-size:1.4rem;position:relative;
+  transition:var(--transition);
+}
+.float-cart:hover{background:var(--dark);transform:scale(1.07)}
+.float-cart-count{
+  position:absolute;top:-4px;right:-4px;
+  background:var(--green);color:var(--white);
+  width:22px;height:22px;border-radius:50%;
+  font-size:.7rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--white);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.float-cart-count.bump{transform:scale(1.5)}
+.float-wa{
+  background:#25d366;color:var(--white);
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 18px rgba(37,211,102,.4);
+  font-size:1.4rem;
+  transition:var(--transition);
+}
+.float-wa:hover{transform:scale(1.08);background:#22be5b}
+
+/* ─── Cart Overlay & Drawer ──────────────────────── */
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(1,31,5,.45);
+  z-index:400;opacity:0;pointer-events:none;
+  transition:opacity .3s;backdrop-filter:blur(2px);
+}
+.overlay.open{opacity:1;pointer-events:all}
+
+.cart-drawer{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(420px,100vw);
+  background:var(--white);z-index:500;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+  box-shadow:-8px 0 40px rgba(1,31,5,.2);
+}
+.cart-drawer.open{transform:translateX(0)}
+
+.drawer-header{
+  padding:18px 20px;
+  background:linear-gradient(135deg,var(--forest),var(--dark));
+  color:var(--white);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.drawer-header h3{font-size:1.05rem;font-weight:700}
+.close-drawer{
+  color:rgba(255,255,255,.75);font-size:1.4rem;
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:var(--transition);
+}
+.close-drawer:hover{background:rgba(255,255,255,.15);color:var(--white)}
+
+.cart-items{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.empty-cart{text-align:center;padding:48px 20px;color:#aaa}
+.empty-cart .ec-icon{font-size:3rem;margin-bottom:12px}
+.empty-cart p{font-family:'Poppins',sans-serif;font-size:.88rem;line-height:1.7}
+
+.cart-item{
+  background:var(--soft);border-radius:12px;
+  padding:12px;display:flex;gap:10px;align-items:flex-start;
+  animation:slideIn .25s ease;
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.ci-img{width:58px;height:58px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:.84rem;font-weight:700;color:var(--forest);line-height:1.25}
+.ci-unit{font-size:.72rem;color:#999;margin-top:2px}
+.ci-subtotal{font-size:.8rem;font-weight:700;color:var(--dark);margin-top:4px}
+.ci-actions{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.qty-btn{
+  background:var(--white);border:1.5px solid #cce0d4;
+  color:var(--forest);width:26px;height:26px;border-radius:50%;
+  font-size:1rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transition:var(--transition);line-height:1;
+}
+.qty-btn:hover{background:var(--green);border-color:var(--green);color:var(--white)}
+.qty-display{font-size:.85rem;font-weight:700;min-width:20px;text-align:center;color:var(--deepest)}
+.remove-btn{
+  margin-left:auto;color:#e05555;
+  font-size:.75rem;font-weight:600;
+  padding:3px 8px;border-radius:6px;transition:var(--transition);
+}
+.remove-btn:hover{background:#ffeaea}
+
+.cart-footer{
+  flex-shrink:0;padding:16px 20px 20px;
+  border-top:1px solid #e0ede5;background:var(--white);
+}
+.grand-total-row{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;
+}
+.grand-total-row .label{font-size:.85rem;color:#666;font-weight:600}
+.grand-total-row .amount{font-size:1.25rem;font-weight:800;color:var(--forest)}
+.checkout-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  color:var(--white);padding:14px;border-radius:12px;
+  font-size:.92rem;font-weight:700;letter-spacing:.5px;
+  transition:var(--transition);
+  box-shadow:0 4px 16px rgba(45,170,121,.3);
+}
+.checkout-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(45,170,121,.4)}
+.checkout-btn:disabled{background:#ccc;box-shadow:none;transform:none;cursor:not-allowed}
+
+/* ─── Checkout Modal ─────────────────────────────── */
+.modal-wrap{
+  position:fixed;inset:0;
+  background:rgba(1,31,5,.55);
+  z-index:600;
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  backdrop-filter:blur(3px);
+}
+@media(min-width:600px){.modal-wrap{align-items:center}}
+.modal-wrap.open{opacity:1;pointer-events:all}
+
+.modal-box{
+  background:var(--white);border-radius:24px 24px 0 0;
+  width:100%;max-width:520px;max-height:92vh;
+  overflow-y:auto;
+  transform:translateY(60px);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  padding:24px 20px 32px;
+}
+@media(min-width:600px){.modal-box{border-radius:24px}}
+.modal-wrap.open .modal-box{transform:translateY(0)}
+
+.modal-title{font-size:1.1rem;font-weight:800;color:var(--forest);margin-bottom:4px}
+.modal-subtitle{font-size:.78rem;color:#999;font-family:'Poppins',sans-serif;margin-bottom:18px}
+
+.order-summary-preview{
+  background:var(--soft);border-radius:12px;
+  padding:12px 14px;margin-bottom:16px;
+  font-size:.77rem;color:#666;font-family:'Poppins',sans-serif;
+}
+.order-summary-preview strong{color:var(--forest);font-size:.8rem;display:block;margin-bottom:6px}
+.osp-item{
+  display:flex;justify-content:space-between;
+  padding:4px 0;border-bottom:1px solid #dce8e0;
+}
+.osp-item:last-child{border:none}
+.osp-total{
+  display:flex;justify-content:space-between;
+  margin-top:8px;padding-top:6px;
+  border-top:2px solid #cce0d4;
+  font-weight:700;font-size:.85rem;color:var(--dark);
+}
+
+.form-group{margin-bottom:13px}
+.form-group label{
+  display:block;font-size:.73rem;font-weight:700;
+  color:var(--forest);margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.form-group input,.form-group textarea{
+  width:100%;padding:11px 14px;
+  border:1.5px solid #cce0d4;border-radius:10px;
+  font-size:.88rem;font-family:var(--font-main);
+  color:var(--deepest);background:var(--soft);
+  outline:none;transition:border-color .2s;resize:none;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--green);background:var(--white)}
+.form-group textarea{height:76px}
+
+.submit-order-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  color:var(--white);padding:14px;border-radius:12px;
+  font-size:.92rem;font-weight:700;transition:var(--transition);
+  box-shadow:0 4px 16px rgba(45,170,121,.3);
+}
+.submit-order-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(45,170,121,.4)}
+.submit-order-btn:disabled{background:#ccc;box-shadow:none;transform:none;cursor:not-allowed}
+.cancel-order-btn{
+  width:100%;padding:11px;border-radius:12px;
+  font-size:.85rem;font-weight:600;color:#999;margin-top:10px;
+  transition:var(--transition);
+}
+.cancel-order-btn:hover{background:var(--soft);color:var(--deepest)}
+
+/* Success */
+.success-screen{text-align:center;padding:20px 10px;display:none}
+.success-screen .success-icon{font-size:3.5rem;margin-bottom:12px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.success-screen h3{font-size:1.15rem;font-weight:800;color:var(--forest);margin-bottom:8px}
+.success-screen p{font-size:.84rem;color:#666;font-family:'Poppins',sans-serif;line-height:1.65;margin-bottom:18px}
+.wa-link-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#25d366;color:var(--white);
+  padding:12px 24px;border-radius:50px;
+  font-size:.9rem;font-weight:700;
+  box-shadow:0 4px 16px rgba(37,211,102,.35);transition:var(--transition);
+}
+.wa-link-btn:hover{transform:translateY(-2px);background:#22be5b}
+.close-success-btn{
+  display:block;margin:14px auto 0;
+  font-size:.8rem;color:#aaa;font-weight:600;
+  padding:8px;transition:var(--transition);
+}
+.close-success-btn:hover{color:var(--deepest)}
+
+/* ─── Footer ────────────────────────────────────── */
+footer{
+  background:var(--deepest);color:rgba(255,255,255,.65);
+  padding:32px 20px;text-align:center;
+}
+.footer-logo{font-family:'Pacifico',cursive;font-size:1.4rem;color:var(--white);margin-bottom:8px}
+.footer-logo em{color:var(--green);font-style:normal}
+.footer-turtle{font-family:'Comfortaa',cursive;font-size:.75rem;letter-spacing:3px;color:rgba(255,255,255,.5)}
+.footer-info{font-size:.78rem;line-height:2.1;font-family:'Poppins',sans-serif;margin-top:10px}
+.footer-info a{color:var(--green)}
+.footer-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:18px 0}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.3)}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--soft)}
+::-webkit-scrollbar-thumb{background:#b0ccba;border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ══════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="https://i.ibb.co/PvgMstHX/Cr-20260304-104252-0000.png" alt="Crochet Turtle Logo" class="logo-img" loading="lazy"/>
+      <div class="brand-text">
+        <span class="brand-crochet">
+          <span class="rest">Cr</span><span class="o-letter">o</span><span class="rest">chet</span>
+        </span>
+        <span class="brand-turtle">TURTLE</span>
+        <span class="tagline">Turning yarn into Magic ✨</span>
+      </div>
+    </div>
+    <button class="cart-btn-header" onclick="openCart()">
+      🛒 Cart <span class="cart-count-badge" id="headerCartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section class="hero">
+  <h2>Handcrafted with <em>Love &amp; Yarn</em></h2>
+  <p>Every piece is unique — made just for you, with care.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">👜 Handbags</span>
+    <span class="hero-pill">🌸 Earrings</span>
+    <span class="hero-pill">🎀 Hair Clips</span>
+    <span class="hero-pill">📍 Tata, Jharkhand</span>
+  </div>
+</section>
+
+<!-- ═══ FILTERS ════════════════════════════════════════ -->
+<section class="filters-section">
+  <div class="filters-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" onclick="filterProducts('all',this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('Handbag',this)">👜 Handbag</button>
+    <button class="filter-btn" onclick="filterProducts('Earrings',this)">🌸 Earrings</button>
+    <button class="filter-btn" onclick="filterProducts('Hair Clips',this)">🎀 Hair Clips</button>
+  </div>
+</section>
+
+<!-- ═══ PRODUCTS ═══════════════════════════════════════ -->
+<section class="products-section">
+  <div class="section-title">Our Collection</div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">Cr<em>o</em>chet</div>
+  <div class="footer-turtle">TURTLE</div>
+  <div class="footer-info">
+    Turning yarn into Magic ✨<br>
+    📍 Tata, Jharkhand<br>
+    📞 <a href="tel:+917782877797">+91 77828 77797</a><br>
+    ✉️ <a href="mailto:crochet.turtlee@gmail.com">crochet.turtlee@gmail.com</a>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-copy">© 2026 Crochet Turtle. All rights reserved. Handmade with 🧶 love.</div>
+</footer>
+
+<!-- ═══ FLOATING BUTTONS ══════════════════════════════ -->
+<div class="float-wrap">
+  <a href="https://wa.me/917782877797" target="_blank" class="float-wa" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.83.738 5.485 2.027 7.793L0 32l8.424-2.007A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.3 13.3 0 01-6.787-1.855l-.487-.288-5.003 1.193 1.214-4.876-.319-.508A13.3 13.3 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.29-9.987c-.4-.2-2.367-1.168-2.733-1.3-.367-.133-.633-.2-.9.2-.267.4-1.033 1.3-1.267 1.567-.233.267-.467.3-.867.1-.4-.2-1.687-.622-3.213-1.982-1.187-1.059-1.989-2.367-2.222-2.767-.233-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.233.267-.4.4-.667.133-.267.067-.5-.033-.7-.1-.2-.9-2.167-1.233-2.967-.325-.78-.656-.674-.9-.686l-.767-.013c-.267 0-.7.1-1.067.5-.367.4-1.4 1.367-1.4 3.333s1.433 3.867 1.633 4.133c.2.267 2.82 4.307 6.833 6.033.955.413 1.7.66 2.28.845.958.306 1.83.263 2.518.16.768-.115 2.367-.968 2.7-1.9.333-.933.333-1.733.233-1.9-.1-.167-.367-.267-.767-.467z"/></svg>
+  </a>
+  <button class="float-cart" onclick="openCart()" title="Open Cart" aria-label="Open Cart">
+    🛒
+    <span class="float-cart-count" id="floatCartCount">0</span>
+  </button>
+</div>
+
+<!-- ═══ CART OVERLAY + DRAWER ════════════════════════ -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Shopping Cart">
+  <div class="drawer-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="close-drawer" onclick="closeCart()" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsContainer"></div>
+  <div class="cart-footer">
+    <div class="grand-total-row">
+      <span class="label">Grand Total</span>
+      <span class="amount" id="grandTotal">₹0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>🛍️ Place Order</button>
+  </div>
+</div>
+
+<!-- ═══ CHECKOUT MODAL ════════════════════════════════ -->
+<div class="modal-wrap" id="checkoutModal" role="dialog" aria-label="Checkout">
+  <div class="modal-box" id="checkoutModalBox">
+
+    <div id="orderFormSection">
+      <div class="modal-title">📦 Complete Your Order</div>
+      <div class="modal-subtitle">Fill in your details — we'll WhatsApp you to confirm!</div>
+      <div class="order-summary-preview" id="orderSummaryPreview"></div>
+
+      <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+        <input type="hidden" name="_subject" id="emailSubject"/>
+        <input type="hidden" name="order_details" id="hiddenOrderDetails"/>
+        <input type="hidden" name="grand_total" id="hiddenGrandTotal"/>
+
+        <div class="form-group">
+          <label for="custName">Your Name *</label>
+          <input type="text" id="custName" name="customer_name" placeholder="e.g. Priya Sharma" required/>
+        </div>
+        <div class="form-group">
+          <label for="custPhone">Phone Number *</label>
+          <input type="tel" id="custPhone" name="customer_phone" placeholder="+91 98765 43210" required/>
+        </div>
+        <div class="form-group">
+          <label for="custAddress">Delivery Address *</label>
+          <textarea id="custAddress" name="delivery_address" placeholder="Full address with pin code" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="custInstructions">Special Instructions (optional)</label>
+          <textarea id="custInstructions" name="special_instructions" placeholder="e.g. Colour preference, gift wrapping, etc."></textarea>
+        </div>
+
+        <button type="submit" class="submit-order-btn" id="submitOrderBtn">✅ Confirm Order</button>
+        <button type="button" class="cancel-order-btn" onclick="closeCheckout()">← Back to Cart</button>
+      </form>
+    </div>
+
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">🎉</div>
+      <h3>Order Placed Successfully!</h3>
+      <p>Thank you! <strong>Crochet Turtle</strong> will contact you on WhatsApp soon to confirm your order, availability, and delivery details.</p>
+      <a href="https://wa.me/917782877797" target="_blank" class="wa-link-btn">
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.83.738 5.485 2.027 7.793L0 32l8.424-2.007A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.3 13.3 0 01-6.787-1.855l-.487-.288-5.003 1.193 1.214-4.876-.319-.508A13.3 13.3 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.29-9.987c-.4-.2-2.367-1.168-2.733-1.3-.367-.133-.633-.2-.9.2-.267.4-1.033 1.3-1.267 1.567-.233.267-.467.3-.867.1-.4-.2-1.687-.622-3.213-1.982-1.187-1.059-1.989-2.367-2.222-2.767-.233-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.233.267-.4.4-.667.133-.267.067-.5-.033-.7-.1-.2-.9-2.167-1.233-2.967-.325-.78-.656-.674-.9-.686l-.767-.013c-.267 0-.7.1-1.067.5-.367.4-1.4 1.367-1.4 3.333s1.433 3.867 1.633 4.133c.2.267 2.82 4.307 6.833 6.033.955.413 1.7.66 2.28.845.958.306 1.83.263 2.518.16.768-.115 2.367-.968 2.7-1.9.333-.933.333-1.733.233-1.9-.1-.167-.367-.267-.767-.467z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <button class="close-success-btn" onclick="closeAfterSuccess()">Close</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ JAVASCRIPT ════════════════════════════════════ -->
+<script>
+const PRODUCTS = [
+  {
+    id:1, name:"Crochet Blue Colour Handbag", price:700, category:"Handbag",
+    desc:"Handmade Premium yarn crochet Handbag",
+    images:[
+      "https://i.ibb.co/ksJRbrhr/1772596855606-2.jpg",
+      "https://i.ibb.co/vxKR1kLw/1772596951776-2.jpg",
+      "https://i.ibb.co/ksYwPJXG/1772597122728-2.jpg",
+      "https://i.ibb.co/PvHyQqBQ/1772596969765-2.jpg"
+    ]
+  },
+  {
+    id:2, name:"Crochet Beige Colour Handbag", price:800, category:"Handbag",
+    desc:"Handmade Premium yarn crochet Handbag",
+    images:[
+      "https://i.ibb.co/NRLpXTS/1772547597968-2.jpg",
+      "https://i.ibb.co/mCwb6b48/1772547729606-2.jpg",
+      "https://i.ibb.co/0yVQBfhn/1772548046340-2.jpg",
+      "https://i.ibb.co/wDnVKkp/1772548223606-2.jpg"
+    ]
+  },
+  {
+    id:3, name:"Crochet Earrings", price:150, category:"Earrings",
+    desc:"Handmade Premium yarn crochet Earrings. Colours can be customized",
+    images:[
+      "https://i.ibb.co/KckWkgBB/1772546083827.png",
+      "https://i.ibb.co/BH1wcTry/1772546971973.png",
+      "https://i.ibb.co/V0k8hPkV/1772547407586.png",
+      "https://i.ibb.co/xKgG7G4Q/1772546098119.png"
+    ]
+  },
+  {
+    id:4, name:"Crochet Earrings", price:150, category:"Earrings",
+    desc:"Handmade Premium quality yarn crochet Earrings. Colours can be customized",
+    images:[
+      "https://i.ibb.co/DfrHsqH6/1772597447443-2.jpg",
+      "https://i.ibb.co/N6bZDSjn/1772598273752-2.jpg",
+      "https://i.ibb.co/Q7hFd3WP/1772597548205-2.jpg",
+      "https://i.ibb.co/CKMyCLRV/1772597641299-2.jpg"
+    ]
+  },
+  {
+    id:5, name:"Crochet Bow-Hair Clip", price:150, category:"Hair Clips",
+    desc:"Handmade Premium yarn crochet Hair Clip. Colours can be customized",
+    images:[
+      "https://i.ibb.co/7dHJGQxq/1772549686781-2.jpg",
+      "https://i.ibb.co/7x7v3YqW/1772549425474-2.jpg",
+      "https://i.ibb.co/8HHSd9j/1772549974699-2.jpg",
+      "https://i.ibb.co/VWH9fRZg/1772548367176-2.jpg"
+    ]
+  }
+];
+
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem('ct_cart') || '[]'); } catch(e){ cart = []; }
+let carouselIndexes = {};
+
+/* ── Cart helpers ── */
+function saveCart(){ localStorage.setItem('ct_cart', JSON.stringify(cart)); updateCartUI(); }
+function totalItems(){ return cart.reduce((s,i)=>s+i.qty,0); }
+function grandTotalAmt(){ return cart.reduce((s,i)=>s+i.price*i.qty,0); }
+
+function updateCartUI(){
+  const count = totalItems();
+  document.getElementById('headerCartCount').textContent = count;
+  document.getElementById('floatCartCount').textContent = count;
+  document.getElementById('grandTotal').textContent = '₹' + grandTotalAmt().toLocaleString('en-IN');
+  document.getElementById('checkoutBtn').disabled = cart.length === 0;
+  renderCartItems();
+}
+
+function renderCartItems(){
+  const c = document.getElementById('cartItemsContainer');
+  if(!cart.length){
+    c.innerHTML = `<div class="empty-cart"><div class="ec-icon">🧶</div><p>Your cart is empty.<br>Add something handmade!</p></div>`;
+    return;
+  }
+  c.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      <img class="ci-img" src="${item.img}" alt="${item.name}" loading="lazy"/>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-unit">₹${item.price.toLocaleString('en-IN')} each</div>
+        <div class="ci-subtotal">Subtotal: ₹${(item.price*item.qty).toLocaleString('en-IN')}</div>
+        <div class="ci-actions">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)" aria-label="Decrease quantity">−</button>
+          <span class="qty-display">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)" aria-label="Increase quantity">+</button>
+          <button class="remove-btn" onclick="removeItem(${item.id})">✕ Remove</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function addToCart(productId){
+  const p = PRODUCTS.find(x=>x.id===productId);
+  const existing = cart.find(i=>i.id===productId);
+  const img = p.images[carouselIndexes[productId]||0];
+  if(existing){ existing.qty++; }
+  else{ cart.push({id:p.id, name:p.name, price:p.price, qty:1, img}); }
+  saveCart();
+  // badge bump
+  const badge = document.getElementById('floatCartCount');
+  badge.classList.remove('bump');
+  void badge.offsetWidth;
+  badge.classList.add('bump');
+  setTimeout(()=>badge.classList.remove('bump'),400);
+  // button feedback
+  const btn = document.getElementById(`atc-${productId}`);
+  if(btn){
+    btn.textContent='✓ Added'; btn.classList.add('added');
+    setTimeout(()=>{ btn.textContent='🛒 Add'; btn.classList.remove('added'); },1200);
+  }
+}
+
+function changeQty(id, delta){
+  const item = cart.find(i=>i.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0){ removeItem(id); return; }
+  saveCart();
+}
+
+function removeItem(id){ cart=cart.filter(i=>i.id!==id); saveCart(); }
+
+/* ── Cart drawer ── */
+function openCart(){
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
+  document.body.style.overflow='hidden';
+  updateCartUI();
+}
+function closeCart(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ── Checkout modal ── */
+function buildSummaryText(){
+  let lines = cart.map(i=>`• ${i.name} x${i.qty} = Rs.${(i.price*i.qty).toLocaleString('en-IN')}`);
+  lines.push(`\nGRAND TOTAL: Rs.${grandTotalAmt().toLocaleString('en-IN')}`);
+  return lines.join('\n');
+}
+
+function openCheckout(){
+  if(!cart.length) return;
+  document.getElementById('orderSummaryPreview').innerHTML =
+    `<strong>Your Order:</strong>` +
+    cart.map(i=>`<div class="osp-item"><span>${i.name} × ${i.qty}</span><span>₹${(i.price*i.qty).toLocaleString('en-IN')}</span></div>`).join('') +
+    `<div class="osp-total"><span>Grand Total</span><span>₹${grandTotalAmt().toLocaleString('en-IN')}</span></div>`;
+  document.getElementById('hiddenOrderDetails').value = buildSummaryText();
+  document.getElementById('hiddenGrandTotal').value = 'Rs.' + grandTotalAmt().toLocaleString('en-IN');
+  document.getElementById('emailSubject').value = `New Order – Crochet Turtle | Rs.${grandTotalAmt().toLocaleString('en-IN')}`;
+  closeCart();
+  document.getElementById('checkoutModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('orderFormSection').style.display='block';
+  document.getElementById('successScreen').style.display='none';
+  document.getElementById('submitOrderBtn').textContent='✅ Confirm Order';
+  document.getElementById('submitOrderBtn').disabled=false;
+}
+
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+async function handleOrderSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitOrderBtn');
+  btn.textContent='⏳ Sending...'; btn.disabled=true;
+
+  const custName = document.getElementById('custName').value;
+  const custPhone = document.getElementById('custPhone').value;
+  const custAddr = document.getElementById('custAddress').value;
+  const custInstr = document.getElementById('custInstructions').value;
+
+  const body = {
+    _subject: document.getElementById('emailSubject').value,
+    customer_name: custName,
+    customer_phone: custPhone,
+    delivery_address: custAddr,
+    special_instructions: custInstr || 'None',
+    order_items: buildSummaryText(),
+    grand_total: 'Rs.' + grandTotalAmt().toLocaleString('en-IN'),
+    message:
+      `==== NEW ORDER – CROCHET TURTLE ====\n\n` +
+      `CUSTOMER NAME: ${custName}\nPHONE: ${custPhone}\nADDRESS: ${custAddr}\nINSTRUCTIONS: ${custInstr||'None'}\n\n` +
+      `ORDER ITEMS:\n${buildSummaryText()}`
+  };
+
+  try{
+    const res = await fetch('https://formspree.io/f/mwvngnyb', {
+      method:'POST', body: JSON.stringify(body),
+      headers:{'Accept':'application/json','Content-Type':'application/json'}
+    });
+    if(res.ok){
+      cart=[]; saveCart();
+      document.getElementById('orderForm').reset();
+      document.getElementById('orderFormSection').style.display='none';
+      document.getElementById('successScreen').style.display='block';
+    } else {
+      btn.textContent='✅ Confirm Order'; btn.disabled=false;
+      alert('Something went wrong. Please try again or contact us on WhatsApp!');
+    }
+  } catch(err){
+    btn.textContent='✅ Confirm Order'; btn.disabled=false;
+    alert('Network error. Please check your connection and try again.');
+  }
+}
+
+function closeAfterSuccess(){
+  closeCheckout(); updateCartUI();
+}
+
+/* ── Product rendering ── */
+function renderProducts(filter='all'){
+  const grid = document.getElementById('productsGrid');
+  const list = filter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.category===filter);
+  grid.innerHTML = list.map(p=>{
+    const multi = p.images.length>1;
+    return `
+    <div class="product-card">
+      <span class="card-cat-badge">${p.category}</span>
+      <div class="img-carousel">
+        <div class="img-carousel-track" id="track-${p.id}">
+          ${p.images.map((url,i)=>`<img src="${url}" alt="${p.name} – view ${i+1}" loading="lazy"/>`).join('')}
+        </div>
+        ${multi?`
+        <button class="carousel-prev" onclick="carouselMove(${p.id},-1)" aria-label="Previous image">&#8249;</button>
+        <button class="carousel-next" onclick="carouselMove(${p.id},1)" aria-label="Next image">&#8250;</button>
+        <div class="carousel-dots" id="dots-${p.id}">
+          ${p.images.map((_,i)=>`<span class="carousel-dot${i===0?' active':''}" onclick="carouselGo(${p.id},${i})"></span>`).join('')}
+        </div>`:''}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-footer">
+          <span class="card-price">₹${p.price.toLocaleString('en-IN')}</span>
+          <button class="add-cart-btn" id="atc-${p.id}" onclick="addToCart(${p.id})">🛒 Add</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Carousel ── */
+function carouselMove(id, dir){
+  const p = PRODUCTS.find(x=>x.id===id);
+  let idx = (carouselIndexes[id]||0)+dir;
+  idx = (idx+p.images.length)%p.images.length;
+  carouselIndexes[id]=idx; applyCarousel(id,idx);
+}
+function carouselGo(id,idx){ carouselIndexes[id]=idx; applyCarousel(id,idx); }
+function applyCarousel(id,idx){
+  const t=document.getElementById(`track-${id}`);
+  if(t) t.style.transform=`translateX(-${idx*100}%)`;
+  const d=document.getElementById(`dots-${id}`);
+  if(d) d.querySelectorAll('.carousel-dot').forEach((dot,i)=>dot.classList.toggle('active',i===idx));
+}
+
+/* ── Filter ── */
+function filterProducts(filter, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  carouselIndexes={};
+  renderProducts(filter);
+}
+
+/* ── Keyboard close ── */
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape'){
+    closeCart();
+    closeCheckout();
+  }
+});
+
+/* ── Init ── */
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
